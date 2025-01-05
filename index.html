@@ -1,0 +1,119 @@
+from flask import Flask
+import random
+
+# HTML content as a simple string for easy GitHub hosting
+html_template = """
+<!DOCTYPE html>
+<html lang=\"en\">
+<head>
+    <meta charset=\"UTF-8\">
+    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">
+    <title>Say Yes to the Date</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to bottom right, #ff9a9e, #fad0c4);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+        .container {
+            text-align: center;
+            color: #fff;
+        }
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        .buttons {
+            position: relative;
+        }
+        .button {
+            padding: 15px 30px;
+            font-size: 1rem;
+            font-weight: bold;
+            color: #fff;
+            background-color: #ff6b81;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+        .button:hover {
+            background-color: #ff3f61;
+        }
+        .button#no {
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        .hidden {
+            display: none;
+        }
+        .date-options {
+            margin-top: 20px;
+        }
+        .option {
+            display: inline-block;
+            margin: 10px;
+            padding: 15px;
+            background: #ffffffc2;
+            border-radius: 15px;
+            font-size: 1rem;
+            color: #ff6b81;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        .option:hover {
+            transform: scale(1.1);
+            background-color: #ff6b81;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class=\"container\">
+        <div id=\"step1\">
+            <h1>Will you go on a date with me?</h1>
+            <div class=\"buttons\">
+                <button class=\"button\" id=\"yes\" onclick=\"proceedToStep2()\">Yes</button>
+                <button class=\"button\" id=\"no\" onmouseover=\"flyAway()\">No</button>
+            </div>
+        </div>
+        <div id=\"step2\" class=\"hidden\">
+            <h1>Great! Now, let's pick our perfect date:</h1>
+            <div class=\"date-options\">
+                <div class=\"option\">Cafe for Cozy Conversations</div>
+                <div class=\"option\">Bowling Night</div>
+                <div class=\"option\">A Random Walk in the Park</div>
+                <div class=\"option\">Ice Cream Date</div>
+                <div class=\"option\">Mini Golf Adventure</div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function flyAway() {
+            const noButton = document.getElementById('no');
+            noButton.style.top = `${Math.random() * 50}px`;
+            noButton.style.left = `${Math.random() * 50}px`;
+            noButton.style.transform = `translate(${Math.random() * 300 - 150}px, ${Math.random() * 300 - 150}px)`;
+        }
+        function proceedToStep2() {
+            document.getElementById('step1').classList.add('hidden');
+            document.getElementById('step2').classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>
+"""
+
+# Save the HTML to a file for GitHub Pages hosting
+with open("index.html", "w") as f:
+    f.write(html_template)
+
+print("HTML file created: index.html. You can now upload it to GitHub Pages.")
