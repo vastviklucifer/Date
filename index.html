@@ -1,7 +1,7 @@
 from flask import Flask
 import random
 
-# HTML content as a simple string for easy GitHub hosting
+# HTML content with romantic and mischievous theme using an image background
 html_template = """
 <!DOCTYPE html>
 <html lang=\"en\">
@@ -14,7 +14,9 @@ html_template = """
             margin: 0;
             padding: 0;
             font-family: 'Arial', sans-serif;
-            background: linear-gradient(to bottom right, #ff9a9e, #fad0c4);
+            background-image: url('https://source.unsplash.com/1600x900/?romantic,couple');
+            background-size: cover;
+            background-position: center;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -24,6 +26,9 @@ html_template = """
         .container {
             text-align: center;
             color: #fff;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 20px;
+            border-radius: 15px;
         }
         h1 {
             font-size: 2.5rem;
@@ -48,8 +53,6 @@ html_template = """
         }
         .button#no {
             position: absolute;
-            top: 0;
-            left: 0;
         }
         .hidden {
             display: none;
@@ -99,10 +102,21 @@ html_template = """
     <script>
         function flyAway() {
             const noButton = document.getElementById('no');
-            noButton.style.top = `${Math.random() * 50}px`;
-            noButton.style.left = `${Math.random() * 50}px`;
-            noButton.style.transform = `translate(${Math.random() * 300 - 150}px, ${Math.random() * 300 - 150}px)`;
+            const container = document.querySelector('.container');
+
+            // Ensure the button stays within the container bounds
+            const containerRect = container.getBoundingClientRect();
+            const maxX = containerRect.width - noButton.offsetWidth;
+            const maxY = containerRect.height - noButton.offsetHeight;
+
+            const randomX = Math.random() * maxX;
+            const randomY = Math.random() * maxY;
+
+            noButton.style.position = 'absolute';
+            noButton.style.top = `${randomY}px`;
+            noButton.style.left = `${randomX}px`;
         }
+
         function proceedToStep2() {
             document.getElementById('step1').classList.add('hidden');
             document.getElementById('step2').classList.remove('hidden');
